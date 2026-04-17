@@ -87,12 +87,11 @@
 
     /* ===== HERO ===== */
     #hero {
-      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 30px 80px;
+      padding: 120px 30px 30px;
       position: relative;
       background: #FFFFFF;
       overflow: hidden;
@@ -102,9 +101,22 @@
     .wave-with-bubbles {
       position: relative;
       background: #FFFFFF;
-      height: 220px;
+      height: 180px;
       overflow: visible;
       z-index: 5;
+    }
+
+    /* ===== IBIŠEK ===== */
+    .hero-hibiscus {
+      position: absolute;
+      font-size: 7rem;
+      line-height: 1;
+      top: 50%;
+      left: calc(50% - 320px);
+      transform: translateY(-60%) rotate(-15deg);
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(2px 4px 12px rgba(200,120,100,0.18));
     }
     .wave-svg {
       position: absolute;
@@ -165,11 +177,13 @@
       /* Vertikální pozice sledující vlnu */
       position: relative;
     }
-    .bubble-btn:nth-child(1) { top: 52px; }
-    .bubble-btn:nth-child(2) { top: 78px; }
-    .bubble-btn:nth-child(3) { top: 100px; }
-    .bubble-btn:nth-child(4) { top: 68px; }
-    .bubble-btn:nth-child(5) { top: 30px; }
+    /* vlna: M0,95 C280,30 560,155 840,80 C1040,25 1240,120 1440,65 — výška SVG 175px, div 180px → offset=5px
+       Bubliny na 10%,27%,45%,63%,80% šířky, střed bubliny = offset + wave_y - 45 */
+    .bubble-btn:nth-child(1) { top: 20px; }   /* x≈10%  wave_y≈70  → 5+70-45=30 → ~20 */
+    .bubble-btn:nth-child(2) { top: 55px; }   /* x≈27%  wave_y≈105 → 5+105-45=65 → ~55 */
+    .bubble-btn:nth-child(3) { top: 75px; }   /* x≈45%  wave_y≈130 → 5+130-45=90 → ~75 */
+    .bubble-btn:nth-child(4) { top: 32px; }   /* x≈63%  wave_y≈60  → 5+60-45=20 → ~32 */
+    .bubble-btn:nth-child(5) { top: 5px; }    /* x≈80%  wave_y≈35  → 5+35-45=-5 → ~5  */
     .bubble-btn.active,
     .bubble-btn:hover {
       box-shadow:
@@ -867,6 +881,7 @@
 
   <!-- HERO -->
   <section id="hero">
+    <span class="hero-hibiscus">🌺</span>
     <div>
       <div class="hero-badge">✦ Ručně vyráběno s láskou</div>
       <h1 class="hero-title">
