@@ -109,14 +109,13 @@
     /* ===== IBIŠEK ===== */
     .hero-hibiscus {
       position: absolute;
-      font-size: 7rem;
-      line-height: 1;
+      width: 160px; height: 160px;
       top: 50%;
-      left: calc(50% - 320px);
-      transform: translateY(-60%) rotate(-15deg);
+      left: calc(50% - 340px);
+      transform: translateY(-55%) rotate(-12deg);
       pointer-events: none;
       user-select: none;
-      filter: drop-shadow(2px 4px 12px rgba(200,120,100,0.18));
+      filter: drop-shadow(3px 6px 14px rgba(180,90,60,0.2));
     }
     .wave-svg {
       position: absolute;
@@ -881,7 +880,60 @@
 
   <!-- HERO -->
   <section id="hero">
-    <span class="hero-hibiscus">🌺</span>
+    <svg class="hero-hibiscus" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="petal1" cx="50%" cy="85%" r="70%">
+          <stop offset="0%" stop-color="#F4A98A"/>
+          <stop offset="55%" stop-color="#EE7B6A"/>
+          <stop offset="100%" stop-color="#D4504A"/>
+        </radialGradient>
+        <radialGradient id="petal2" cx="50%" cy="85%" r="70%">
+          <stop offset="0%" stop-color="#F6B99A"/>
+          <stop offset="55%" stop-color="#F08070"/>
+          <stop offset="100%" stop-color="#D85C55"/>
+        </radialGradient>
+        <radialGradient id="petal3" cx="50%" cy="85%" r="70%">
+          <stop offset="0%" stop-color="#F5AF88"/>
+          <stop offset="55%" stop-color="#EC7A65"/>
+          <stop offset="100%" stop-color="#D24E4A"/>
+        </radialGradient>
+        <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#8B1A1A"/>
+          <stop offset="100%" stop-color="#5C0E0E"/>
+        </radialGradient>
+      </defs>
+      <!-- Leaves -->
+      <ellipse cx="28" cy="118" rx="13" ry="7" fill="#7AB648" opacity="0.85" transform="rotate(-40 28 118)"/>
+      <ellipse cx="38" cy="130" rx="11" ry="6" fill="#5E9934" opacity="0.75" transform="rotate(-20 38 130)"/>
+      <ellipse cx="130" cy="122" rx="12" ry="6" fill="#7AB648" opacity="0.80" transform="rotate(35 130 122)"/>
+      <!-- Petals (5) -->
+      <ellipse cx="80" cy="105" rx="18" ry="34" fill="url(#petal1)" opacity="0.92"/>
+      <ellipse cx="80" cy="105" rx="18" ry="34" fill="url(#petal2)" opacity="0.90" transform="rotate(-72 80 80)"/>
+      <ellipse cx="80" cy="105" rx="18" ry="34" fill="url(#petal1)" opacity="0.90" transform="rotate(-144 80 80)"/>
+      <ellipse cx="80" cy="105" rx="18" ry="34" fill="url(#petal2)" opacity="0.90" transform="rotate(144 80 80)"/>
+      <ellipse cx="80" cy="105" rx="18" ry="34" fill="url(#petal3)" opacity="0.90" transform="rotate(72 80 80)"/>
+      <!-- Petal veins -->
+      <line x1="80" y1="80" x2="80" y2="128" stroke="#C84040" stroke-width="0.7" opacity="0.35"/>
+      <line x1="80" y1="80" x2="80" y2="128" stroke="#C84040" stroke-width="0.7" opacity="0.35" transform="rotate(-72 80 80)"/>
+      <line x1="80" y1="80" x2="80" y2="128" stroke="#C84040" stroke-width="0.7" opacity="0.35" transform="rotate(-144 80 80)"/>
+      <line x1="80" y1="80" x2="80" y2="128" stroke="#C84040" stroke-width="0.7" opacity="0.35" transform="rotate(144 80 80)"/>
+      <line x1="80" y1="80" x2="80" y2="128" stroke="#C84040" stroke-width="0.7" opacity="0.35" transform="rotate(72 80 80)"/>
+      <!-- Stamen tube -->
+      <rect x="76.5" y="54" width="7" height="28" rx="3.5" fill="#FADA5E"/>
+      <rect x="76.5" y="54" width="7" height="28" rx="3.5" fill="none" stroke="#C9A020" stroke-width="0.8"/>
+      <!-- Pollen dots -->
+      <circle cx="80" cy="53" r="3.2" fill="#FADA5E" stroke="#C9A020" stroke-width="0.7"/>
+      <circle cx="73" cy="58" r="2.6" fill="#FADA5E" stroke="#C9A020" stroke-width="0.6"/>
+      <circle cx="87" cy="58" r="2.6" fill="#FADA5E" stroke="#C9A020" stroke-width="0.6"/>
+      <circle cx="75" cy="66" r="2.2" fill="#F5C830" stroke="#C9A020" stroke-width="0.5"/>
+      <circle cx="85" cy="66" r="2.2" fill="#F5C830" stroke="#C9A020" stroke-width="0.5"/>
+      <circle cx="80" cy="70" r="2.0" fill="#F5C830" stroke="#C9A020" stroke-width="0.5"/>
+      <!-- Center circle -->
+      <circle cx="80" cy="80" r="11" fill="url(#centerGrad)"/>
+      <circle cx="80" cy="80" r="11" fill="none" stroke="#3A0808" stroke-width="0.8"/>
+      <!-- Center highlight -->
+      <circle cx="76" cy="76" r="3" fill="rgba(255,180,150,0.3)"/>
+    </svg>
     <div>
       <div class="hero-badge">✦ Ručně vyráběno s láskou</div>
       <h1 class="hero-title">
