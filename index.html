@@ -28,9 +28,10 @@
       --brown:      #5C3D3D;
       --brown-light:#9B7B7B;
       --white:      #FFFFFF;
-      --lavender:   #DDD4F5;
-      --lavender-deep: #C8BEEA;
-      --lavender-bg:   #EDE8FA;
+      --blue:       #C8DAEE;
+      --blue-deep:  #7AA3D4;
+      --blue-bg:    #BFD0E8;
+      --navy:       #2A4A7A;
     }
 
     /* ===== DECORATIVE ELEMENTS ===== */
@@ -97,59 +98,95 @@
       overflow: hidden;
     }
 
-    /* Subtle soft blobs on white */
-    #hero::before, #hero::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.07;
-      pointer-events: none;
-    }
-    #hero::before {
-      width: 500px; height: 500px;
-      background: var(--lavender-deep);
-      top: -120px; left: -120px;
-    }
-    #hero::after {
-      width: 400px; height: 400px;
-      background: var(--rose);
-      bottom: -100px; right: -100px;
-    }
-
-    /* ===== WAVE DIVIDER ===== */
-    .wave-divider {
+    /* ===== WAVE + BUBLINY ===== */
+    .wave-with-bubbles {
       position: relative;
-      line-height: 0;
-      overflow: hidden;
-      margin-bottom: -2px;
+      background: #FFFFFF;
+      height: 220px;
+      overflow: visible;
+      z-index: 5;
     }
-    .wave-divider svg { display: block; width: 100%; }
-
-    /* Shimmering white line on the wave */
-    .wave-divider::after {
-      content: '';
+    .wave-svg {
       position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(255,255,255,0) 30%,
-        rgba(255,255,255,0.85) 50%,
-        rgba(255,255,255,0) 70%,
-        transparent 100%);
-      animation: shimmer 3.5s ease-in-out infinite;
-      pointer-events: none;
+      bottom: 0; left: 0;
+      width: 100%; height: 175px;
+      display: block;
     }
-    @keyframes shimmer {
-      0%   { left: -80%; }
-      100% { left: 120%; }
+    /* Shimmer pohybující se po vlně */
+    .wave-shimmer {
+      position: absolute;
+      bottom: 0; left: -60%;
+      width: 40%; height: 175px;
+      background: linear-gradient(90deg,
+        transparent 0%, transparent 35%,
+        rgba(255,255,255,0.75) 50%,
+        transparent 65%, transparent 100%);
+      animation: waveShimmer 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 4;
+    }
+    @keyframes waveShimmer {
+      0%   { left: -60%; }
+      100% { left: 110%; }
+    }
+    /* Skleněné bubliny */
+    .wave-bubbles {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-around;
+      padding: 0 7%;
+      z-index: 10;
+    }
+    .bubble-btn {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 33% 30%,
+          rgba(255,255,255,0.95) 0%,
+          rgba(220,235,255,0.75) 30%,
+          rgba(180,215,255,0.45) 65%,
+          rgba(150,200,250,0.2) 100%);
+      border: 2px solid rgba(255,255,255,0.88);
+      box-shadow:
+        inset 0 3px 8px rgba(255,255,255,0.95),
+        inset 0 -3px 6px rgba(80,130,200,0.12),
+        0 8px 24px rgba(80,130,200,0.22);
+      font-family: 'Lato', sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #3A5A80;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      /* Vertikální pozice sledující vlnu */
+      position: relative;
+    }
+    .bubble-btn:nth-child(1) { top: 52px; }
+    .bubble-btn:nth-child(2) { top: 78px; }
+    .bubble-btn:nth-child(3) { top: 100px; }
+    .bubble-btn:nth-child(4) { top: 68px; }
+    .bubble-btn:nth-child(5) { top: 30px; }
+    .bubble-btn.active,
+    .bubble-btn:hover {
+      box-shadow:
+        inset 0 3px 10px rgba(255,255,255,1),
+        inset 0 -3px 8px rgba(80,130,200,0.2),
+        0 10px 30px rgba(80,130,200,0.4);
+      transform: translateY(-5px) scale(1.08);
+      color: #1A3A60;
     }
 
-    /* All sections after hero get lavender background */
-    #collection, #how, #love, #contact { background: var(--lavender-bg); }
+    /* Sekce za vlnou mají modré pozadí */
+    #collection { background: var(--blue); }
     #collection .product-card { background: #FFFFFF; }
-    #how { background: rgba(221,212,245,0.5); }
-    footer { background: #3D2D5C; }
+    #how { background: #D0E2F4; }
+    #love { background: linear-gradient(135deg, var(--blue-deep) 0%, #4A75B0 100%); }
+    #contact { background: var(--blue); }
+    footer { background: var(--navy); }
 
     .hero-badge {
       display: inline-block;
@@ -843,52 +880,33 @@
         Prohlédnout kolekci
       </a>
     </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-line"></div>
-      scroll
-    </div>
   </section>
 
-
-  <!-- WAVE DIVIDER -->
-  <div class="wave-divider">
-    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#DDD4F5"/>
-          <stop offset="30%"  stop-color="#EDE8FA"/>
-          <stop offset="50%"  stop-color="#FFFFFF" stop-opacity="0.9"/>
-          <stop offset="70%"  stop-color="#EDE8FA"/>
-          <stop offset="100%" stop-color="#DDD4F5"/>
-        </linearGradient>
-      </defs>
-      <!-- Bílá spodní vrstva (hero) -->
-      <rect width="1440" height="90" fill="#FFFFFF"/>
-      <!-- Fialová vlna přes ni -->
-      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45 L1440,90 L0,90 Z"
-            fill="url(#waveGrad)"/>
-      <!-- Zářivá bílá linka na vrcholu vlny -->
-      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45"
-            fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
-      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45"
-            fill="none" stroke="white" stroke-width="8" opacity="0.3"/>
+  <!-- VLNA S BUBLINAMI -->
+  <div class="wave-with-bubbles">
+    <!-- Skleněné bubliny kategorie -->
+    <div class="wave-bubbles">
+      <button class="bubble-btn active" data-filter="all">Vše</button>
+      <button class="bubble-btn" data-filter="naramky">Náramky</button>
+      <button class="bubble-btn" data-filter="nausnice">Náušnice</button>
+      <button class="bubble-btn" data-filter="zvíratka">Zvířátka</button>
+      <button class="bubble-btn" data-filter="nahrdelniky">Náhrdelníky</button>
+    </div>
+    <!-- Vlna SVG -->
+    <svg class="wave-svg" viewBox="0 0 1440 175" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,95 C280,30 560,155 840,80 C1040,25 1240,120 1440,65 L1440,175 L0,175 Z" fill="#C8DAEE"/>
+      <!-- zářivá bílá linka -->
+      <path d="M0,95 C280,30 560,155 840,80 C1040,25 1240,120 1440,65"
+            fill="none" stroke="white" stroke-width="3.5" opacity="0.85"/>
+      <path d="M0,95 C280,30 560,155 840,80 C1040,25 1240,120 1440,65"
+            fill="none" stroke="white" stroke-width="12" opacity="0.22"/>
     </svg>
+    <!-- Shimmer efekt -->
+    <div class="wave-shimmer"></div>
   </div>
 
   <!-- COLLECTION -->
   <section id="collection">
-    <div class="collection-header">
-      <div class="collection-header-text">
-        <div class="section-label">Kolekce</div>
-        <h2 class="section-title">Vybrané <em>kousky</em></h2>
-      </div>
-      <div class="collection-filter">
-        <button class="filter-btn active" data-filter="all">Vše</button>
-        <button class="filter-btn" data-filter="nausnice">Náušnice</button>
-        <button class="filter-btn" data-filter="naramky">Náramky</button>
-        <button class="filter-btn" data-filter="nahrdelniky">Náhrdelníky</button>
-      </div>
-    </div>
     <div class="products-grid">
 
       <div class="product-card" data-cat="nausnice">
@@ -1249,9 +1267,9 @@
     });
 
     // Collection filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
+    document.querySelectorAll('.bubble-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.bubble-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
         document.querySelectorAll('.product-card').forEach(card => {
