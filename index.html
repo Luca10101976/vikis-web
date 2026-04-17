@@ -28,6 +28,9 @@
       --brown:      #5C3D3D;
       --brown-light:#9B7B7B;
       --white:      #FFFFFF;
+      --lavender:   #DDD4F5;
+      --lavender-deep: #C8BEEA;
+      --lavender-bg:   #EDE8FA;
     }
 
     /* ===== DECORATIVE ELEMENTS ===== */
@@ -88,36 +91,65 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 30px 60px;
+      padding: 100px 30px 80px;
       position: relative;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(232,164,184,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(201,149,110,0.12) 0%, transparent 50%),
-        var(--cream);
+      background: #FFFFFF;
       overflow: hidden;
     }
 
-    /* Floating petals decoration */
+    /* Subtle soft blobs on white */
     #hero::before, #hero::after {
       content: '';
       position: absolute;
-      border-radius: 50% 0 50% 0;
-      opacity: 0.2;
+      border-radius: 50%;
+      opacity: 0.07;
       pointer-events: none;
     }
     #hero::before {
-      width: 400px; height: 400px;
-      background: var(--rose);
-      top: -80px; left: -100px;
-      transform: rotate(30deg);
+      width: 500px; height: 500px;
+      background: var(--lavender-deep);
+      top: -120px; left: -120px;
     }
     #hero::after {
-      width: 300px; height: 300px;
-      background: var(--gold);
-      bottom: -60px; right: -80px;
-      transform: rotate(-20deg);
-      border-radius: 0 50% 0 50%;
+      width: 400px; height: 400px;
+      background: var(--rose);
+      bottom: -100px; right: -100px;
     }
+
+    /* ===== WAVE DIVIDER ===== */
+    .wave-divider {
+      position: relative;
+      line-height: 0;
+      overflow: hidden;
+      margin-bottom: -2px;
+    }
+    .wave-divider svg { display: block; width: 100%; }
+
+    /* Shimmering white line on the wave */
+    .wave-divider::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,255,0) 30%,
+        rgba(255,255,255,0.85) 50%,
+        rgba(255,255,255,0) 70%,
+        transparent 100%);
+      animation: shimmer 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      0%   { left: -80%; }
+      100% { left: 120%; }
+    }
+
+    /* All sections after hero get lavender background */
+    #collection, #how, #love, #contact { background: var(--lavender-bg); }
+    #collection .product-card { background: #FFFFFF; }
+    #how { background: rgba(221,212,245,0.5); }
+    footer { background: #3D2D5C; }
 
     .hero-badge {
       display: inline-block;
@@ -324,7 +356,7 @@
 
     /* ===== COLLECTION ===== */
     #collection {
-      background: var(--cream);
+      background: var(--lavender-bg);
       text-align: center;
     }
     #collection .section-label,
@@ -465,7 +497,7 @@
 
     /* ===== HOW IT WORKS ===== */
     #how {
-      background: var(--white);
+      background: var(--lavender-bg);
       text-align: center;
     }
     #how .section-label { justify-content: center; }
@@ -527,7 +559,7 @@
 
     /* ===== TESTIMONIALS / LOVE ===== */
     #love {
-      background: linear-gradient(135deg, var(--rose-deep) 0%, #A05070 100%);
+      background: linear-gradient(135deg, var(--lavender-deep) 0%, #9B7BC9 100%);
       color: var(--white);
       text-align: center;
       padding: 80px 60px;
@@ -561,7 +593,7 @@
 
     /* ===== CONTACT ===== */
     #contact {
-      background: var(--cream);
+      background: var(--lavender-bg);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
@@ -817,6 +849,31 @@
     </div>
   </section>
 
+
+  <!-- WAVE DIVIDER -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#DDD4F5"/>
+          <stop offset="30%"  stop-color="#EDE8FA"/>
+          <stop offset="50%"  stop-color="#FFFFFF" stop-opacity="0.9"/>
+          <stop offset="70%"  stop-color="#EDE8FA"/>
+          <stop offset="100%" stop-color="#DDD4F5"/>
+        </linearGradient>
+      </defs>
+      <!-- Bílá spodní vrstva (hero) -->
+      <rect width="1440" height="90" fill="#FFFFFF"/>
+      <!-- Fialová vlna přes ni -->
+      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45 L1440,90 L0,90 Z"
+            fill="url(#waveGrad)"/>
+      <!-- Zářivá bílá linka na vrcholu vlny -->
+      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45"
+            fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+      <path d="M0,45 C180,10 360,80 540,45 C720,10 900,80 1080,45 C1260,10 1380,65 1440,45"
+            fill="none" stroke="white" stroke-width="8" opacity="0.3"/>
+    </svg>
+  </div>
 
   <!-- COLLECTION -->
   <section id="collection">
